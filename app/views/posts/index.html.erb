@@ -1,0 +1,12 @@
+<h1>みんなの投稿</h1>
+<tbody>
+<% @posts.each do |post| %>
+  <% if  post.image_url %>
+  <%= image_tag post.image_url %>
+  <% end %>
+  <%= post.user.name %>
+  <%= post.content %>
+</tbody>
+<% end %>
+<br>
+<%= link_to 'New Post', new_post_path %>
