@@ -1,20 +1,26 @@
 class PostsController < ApplicationController
-before_action :set_feed, only: %i[ show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy]  
+  
   def index
     @posts = Post.all
   end
 
   def new
-    @post = Post.new
+    if params[:back]
+      @post = Post.new(post_params)
+    else
+      @post = Post.new
+    end
   end
 
   def confirm
     @post = current_user.posts.build(post_params)
     render :new if @post.invalid?
-    end
+  end
 
   def create
     @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if params[:back]
         render :new
     else 
@@ -32,13 +38,13 @@ before_action :set_feed, only: %i[ show edit update destroy]
 
   def show
     @post = Post.find(params[:id])
-    redirect_to posts_path
-    end
+    @favorite = current_user.favorites.find_by(post_id: @post.id)
+  end
+  
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
-        redirect_to post_path, notice: "Your post edited!"
+        redirect_to posts_path, notice: "Your post was edited!"
     else
         render :edit
     end
@@ -46,22 +52,23 @@ before_action :set_feed, only: %i[ show edit update destroy]
 
   def destroy
     @post = Post.find(params[:id]) 
-    @post.destroy
-    redirect_to posts_path, notice:"Your post deleted!"
+       @post.destroy
+       redirect_to posts_path, notice:"Your post was deleted!"
   end
 
   def confirm
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     render :new if @post.invalid?
   end
 
   private
 
-  def set_feed
+  def set_post
     @post = Post.find(params[:id])
-    end
+  end
 
   def post_params
     params.require(:post).permit(:image, :image_cache, :content)
   end
+
 end

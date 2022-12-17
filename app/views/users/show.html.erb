@@ -1,3 +1,14 @@
 <h1><%= @user.name %>のページ</h1>
-
+<p>
+  <strong>Image:</strong>
+  <% if @user.avatar_url %>
+    <%= image_tag @user.avatar.url %>
+  <% else %>
+  <p>画像の登録はありません</p>
+  <% end %>
+</p>
 <p>メールアドレス: <%= @user.email %></p>
+
+<%= link_to 'Edit', edit_user_path(@user.id) %>
+
+

@@ -1,12 +1,18 @@
 <h1>みんなの投稿</h1>
 <tbody>
 <% @posts.each do |post| %>
-  <% if  post.image_url %>
+  <br>
+  <%= post.user.name %>
+  <br>
+  <% if post.image_url %>
   <%= image_tag post.image_url %>
   <% end %>
-  <%= post.user.name %>
+  <br>
   <%= post.content %>
-</tbody>
+  <%= link_to '詳細', post %>
+  <%= link_to '編集', edit_post_path(post) %>
+  <%= link_to '削除', post, method: :delete, data: {confirm: 'Are you sure?'} %>
 <% end %>
+</tbody>
 <br>
 <%= link_to 'New Post', new_post_path %>
