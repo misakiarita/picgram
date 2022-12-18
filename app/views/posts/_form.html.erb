@@ -2,19 +2,16 @@
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
         <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <%= error.full_message %>
         <% end %>
-      </ul>
     </div>
   <% end %>
 
   <div class="field">
-  <%= form.label :image %>
-  <%= form.file_field :image %>
-  <%= form.hidden_field :image_cache %>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
   </div>
 
   <div class="field">

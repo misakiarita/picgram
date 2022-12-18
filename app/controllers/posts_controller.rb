@@ -34,6 +34,11 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if @post.user_id == current_user.id
+      render :edit
+    else
+      redirect_to posts_path
+    end
   end
 
   def show
@@ -41,7 +46,6 @@ class PostsController < ApplicationController
     @favorite = current_user.favorites.find_by(post_id: @post.id)
   end
   
-
   def update
     if @post.update(post_params)
         redirect_to posts_path, notice: "Your post was edited!"
@@ -52,8 +56,10 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id]) 
-       @post.destroy
-       redirect_to posts_path, notice:"Your post was deleted!"
+    if @post.user_id == current_user.id
+      @post.destroy
+      redirect_to posts_path, notice:"Your post was deleted!"
+    end
   end
 
   def confirm

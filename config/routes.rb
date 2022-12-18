@@ -4,7 +4,14 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
+  
   resources :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :show, :edit, :update]
-  resources :favorites, only: [:create, :destroy]
+  
+  resources :users do
+    member do
+      get :favorite_post
+    end
+  end
+
+  resources :favorites, only: [:create, :destroy, :index]
 end
