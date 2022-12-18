@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      post: ポスト
+      user: ユーザー
+      favorite: お気に入り
+    attributes:
+      favorite:
+        user_id: ユーザーID
+        feed_id: 画像ID
+      post:
+        content: 内容
+        image: イメージ
+      user:
+        name: 名前
+        avatar: アバター
+        email: メールアドレス
+        current_password: 現在のパスワード
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        
