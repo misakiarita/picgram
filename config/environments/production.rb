@@ -119,5 +119,4 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.action_mailer.default_url_options = { host: 'mysterious-eyrie-01618.herokuapp.com' }
   config.action_mailer.delivery_method = :letter_opener_web
-  ActionMailer::Base.delivery_method = :smtp
 end
