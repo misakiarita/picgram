@@ -25,7 +25,8 @@ class PostsController < ApplicationController
         render :new
     else 
         if @post.save
-            redirect_to new_post_path
+          PostMailer.post_mailer(@post.user.email).deliver
+          redirect_to new_post_path
         else
             render :new
         end

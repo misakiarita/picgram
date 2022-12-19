@@ -33,3 +33,10 @@ gem 'bcrypt'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'dotenv-rails'
+gem 'faker'
+gem 'pry-rails'
+gem 'rexml'
+
+group :development do
+  gem 'letter_opener_web'
+end
